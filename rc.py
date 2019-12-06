@@ -1,6 +1,5 @@
 import numpy as np
 
-
 #states[STICKER,POSITION]
 class Cube:
 	def __init__(self):
@@ -10,14 +9,21 @@ class Cube:
 		for i in range(1,24):
 			states[i,i] = True
 
-	# def cycle_edges(self, critical_sticker, clockwise=True):
-		# if !states[critical_sticker,critical_sticker]:
-		# 	return False
+	def is_solved():
+		return np.array_equal(solved, states)
 
-		# clockwise = 3 if clockwise else -3
-
-		# for i in range(-1,2):
-		# 	states[critical_sticker+i,critical_sticker+i]
+	def get_colour(self, num):
+		if num in (24,20,2,3):
+			return 'y'
+		if num in (23,0,12,11):
+			return 'r'
+		if num in (1,4,10,7):
+			return 'g'
+		if num in (5,21,6,17):
+			return 'o'
+		if num in (9,8,14,15):
+			return 'w'
+		return 'b'
 
 	#PRIVATE
 	def find_critial_sticker(cubee_pos):
@@ -65,9 +71,14 @@ class Cube:
 
 		#(csticker, position)
 		new_critical_sticker1 = (critical_sticker1[0],cubee_pos1-1+(critical_sticker1[1]+orient)%3)
-		new_critical_sticker2 = (critical_sticker2[0],cubee_pos1-1+(critical_sticker1[1]+orient)%3)
+		new_critical_sticker2 = (critical_sticker2[0],cubee_pos1-1+(critical_sticker1[1]-orient)%3)
 
 		states[new_critical_sticker1] = True
 		states[new_critical_sticker2] = True
 
 		return True
+
+def main():
+	cube = new Cube()
+
+main()
