@@ -51,9 +51,15 @@ class Cube:
 
 		states[critical_sticker1] = False
 		states[critical_sticker2] = False
-
-		#...
-
+		h1, h2 = cubee_pos1 > 10, cubee_pos2 > 10
+		if h1 == h2:
+			states[critical_sticker1[0],cubee_pos2+critical_sticker1[1]-cubee_pos1] = True
+			states[critical_sticker2[0],cubee_pos1+critical_sticker2[1]-cubee_pos2] = True
+		else:
+			d1,d2 = {-1:1,0:-1,1:0},{1:-1,-1:0,0:1}
+			states[critical_sticker1[0],cubee_pos1+d1[critical_sticker1[1]-cubee_pos1]] = True
+			states[critical_sticker1[0],cubee_pos1+d2[critical_sticker2[1]-cubee_pos2]] = True
+		
 		return True
 
 	def reorient(self, cubee_pos1, cubee_pos2, direction):
