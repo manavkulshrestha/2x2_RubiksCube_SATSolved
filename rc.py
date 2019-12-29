@@ -5,25 +5,11 @@ class Cube:
 	def __init__(self):
 		states = np.full((8,24),False,dtype=bool)
 
-		solved = states.copy()
-		for i in range(1,24):
-			states[i,i] = True
-
 	def is_solved():
-		return np.array_equal(solved, states)
-
-	def get_colour(self, num):
-		if num in (24,20,2,3):
-			return 'y'
-		if num in (23,0,12,11):
-			return 'r'
-		if num in (1,4,10,7):
-			return 'g'
-		if num in (5,21,6,17):
-			return 'o'
-		if num in (9,8,14,15):
-			return 'w'
-		return 'b'
+		for i in range(1,24):
+			if not solved[i,i]:
+				return False
+		return True
 
 	#PRIVATE
 	def find_critial_sticker(cubee_pos):
@@ -83,8 +69,3 @@ class Cube:
 		states[new_critical_sticker2] = True
 
 		return True
-
-def main():
-	cube = new Cube()
-
-main()
